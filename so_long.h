@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/02/28 18:12:39 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:57:31 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+
+# define ESC 65307
+# define W 119
+# define A 97
+# define S 115
+# define D 100
 
 #endif
