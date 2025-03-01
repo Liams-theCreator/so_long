@@ -3,12 +3,17 @@ FLAGS = -Werror -Wall -Wextra
 MFLAGS = -lmlx -lXext -lX11
 SRC = main.c
 OBJ = $(SRC:.c=.o)
+
+GNLOBJ = ./gnl/gnl.a
+PRINTFOBJ = ./printf/libftprintf.a
+LIBFTOBJ = ./libft/libft.a
+
 NAME = so_long
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) $(MFLAGS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJ) $(GNLOBJ) $(PRINTFOBJ) $(LIBFTOBJ) $(MFLAGS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAGS) $(MFLAGS) -c $< -o $@
