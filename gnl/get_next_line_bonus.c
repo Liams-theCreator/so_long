@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:28:46 by imellali          #+#    #+#             */
-/*   Updated: 2024/12/10 16:33:45 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/02 18:15:46 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static char	*nlcheck(char **leftover, char *temp)
 	if (newline)
 	{
 		data = ft_substr(*leftover, 0, newline - *leftover + 1);
+		if (!data)
+			return (NULL);
 		pt = *leftover;
 		*leftover = ft_strdup(newline + 1);
 		freeing(&pt);

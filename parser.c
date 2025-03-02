@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/02 17:49:17 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/02 21:11:33 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ char	**copy_map(char *path, char **map, size_t height)
 
 	i = 0;
 	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		free_array(map);
-		ft_error("Open failed");
-	}
 	while (i < height)
 	{
 		map[i] = get_next_line(fd);
+		if (!map[i])
+		{
+			free_array(map);
+			ft_error("GNL Failed\n");
+		}
 		if (map[i][ft_strlen(map[i]) - 1] == '\n')
 			map[i][ft_strlen(map[i]) - 1] = '\0';
 		i++;
@@ -67,7 +67,7 @@ char	**get_map(char *path, size_t *height)
 	*height = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		ft_error("Open failed");
+		ft_error("Open failed\n");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -78,7 +78,7 @@ char	**get_map(char *path, size_t *height)
 	close(fd);
 	map = malloc(sizeof(char *) * (*height + 1));
 	if (!map)
-		ft_error("Malloc Failed");
+		ft_error("Malloc Failed\n");
 	copy_map(path, map, *height);
 	return (map);
 }
@@ -241,23 +241,24 @@ int	main(int argc, char **argv)
 	size_t	height;
 
 	if (argc != 2)
-		ft_error("Invalid arguments ! > Usage : ./so_long map.ber");
+		ft_error("Invalid arguments ! > Usage : ./so_long map.ber\n");
 	map = get_map(argv[1], &height);
 	if (check_rectangle(map, height) == -1)
 	{
 		free_array(map);
-		ft_error("Map is not rectangle");
+		ft_error("Map is not rectangle\n");
 	}
 	if (check_walls(map, height, ft_strlen(map[0])) == -1)
 	{
 		free_array(map);
-		ft_error("Map is not rounded by walls");
+		ft_error("Map is not rounded by walls\n");
 	}
 	if (check_map(map, height) == -1)
 	{
 		free_array(map);
-		ft_error("The game map is not playable");
+		ft_error("The game map is not playable\n");
 	}
-	ft_printf("Game is playable");
+	free_array(map);
+	ft_printf("Game is playable\n");
 	return (0);
 }
