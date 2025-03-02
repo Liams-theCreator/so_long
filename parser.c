@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/02 04:49:14 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/02 05:04:17 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ char	**copy_map(char *path, char **map, size_t height)
 		map[i] = get_next_line(fd);
 		i++;
 	}
+	get_next_line(fd);
 	map[i] = NULL;
 	close(fd);
 	return (map);
@@ -87,7 +88,7 @@ int	check_walls(char **map, size_t height, size_t width)
 	i = 0;
 	while (i < width)
 	{
-		if (map[0][i] != '1' || map[height - 1][i])
+		if (map[0][i] != '1' || map[height - 1][i] != '1')
 			return (-1);
 		i++;
 	}
@@ -232,7 +233,7 @@ int	main(int argc, char **argv)
 	if (check_walls(map, height, ft_strlen(map[0])) == -1)
 	{
 		free_array(map);
-		ft_error("Map walls is not rounded by walls");
+		ft_error("Map is not rounded by walls");
 	}
 	if (check_map(map, height) == -1)
 	{
