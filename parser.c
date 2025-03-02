@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/02 04:46:17 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/02 04:49:14 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ int	check_rectangle(char **map, size_t height)
 
 void	init_struct_cords(t_cords *cords)
 {
-    cords->player_x = -1;
-    cords->player_y = -1;
-    cords->enemy_x = -1;
-    cords->enemy_y = -1;
-    cords->exit_x = -1;
-    cords->exit_y = -1;
-    cords->col_x = -1;
-    cords->col_y = -1;
+	cords->player_x = -1;
+	cords->player_y = -1;
+	cords->enemy_x = -1;
+	cords->enemy_y = -1;
+	cords->exit_x = -1;
+	cords->exit_y = -1;
+	cords->col_x = -1;
+	cords->col_y = -1;
 }
 
 void	set_cords(int x, int y, int *cord_x, int *cord_y)
@@ -163,12 +163,11 @@ void	store_cords(char **map, size_t height, t_cords *cords)
 
 void	init_struct_elems(t_elems *elems)
 {
-    elems->player = 0;
-    elems->enemy = 0;
-    elems->exit = 0;
-    elems->col = 0;
+	elems->player = 0;
+	elems->enemy = 0;
+	elems->exit = 0;
+	elems->col = 0;
 }
-
 
 void	store_elems(char **map, size_t height, t_elems *elems)
 {
