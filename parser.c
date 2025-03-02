@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/02 05:04:17 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/02 17:49:17 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ char	**copy_map(char *path, char **map, size_t height)
 	while (i < height)
 	{
 		map[i] = get_next_line(fd);
+		if (map[i][ft_strlen(map[i]) - 1] == '\n')
+			map[i][ft_strlen(map[i]) - 1] = '\0';
 		i++;
 	}
 	get_next_line(fd);
@@ -115,6 +117,8 @@ int	check_rectangle(char **map, size_t height)
 			return (-1);
 		i++;
 	}
+	if (i >= width - 1)
+		return (-1);
 	return (0);
 }
 
@@ -217,6 +221,20 @@ int	check_map(char **map, size_t height)
 	return (0);
 }
 
+/*
+void	print_map(char **map, size_t height)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < height)
+	{
+		ft_printf("%s\n", map[i]);
+		i++;
+	}
+}
+*/
+
 int	main(int argc, char **argv)
 {
 	char	**map;
@@ -240,5 +258,6 @@ int	main(int argc, char **argv)
 		free_array(map);
 		ft_error("The game map is not playable");
 	}
+	ft_printf("Game is playable");
 	return (0);
 }
