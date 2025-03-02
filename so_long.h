@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/01 14:57:31 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/02 03:36:27 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,35 @@
 # include <X11/keysym.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <stdio.h>
+# include <fcntl.h>
+# include "./printf/ft_printf.h"
+# include "./gnl/get_next_line_bonus.h"
+# include "./libft/libft.h"
 
 # define ESC 65307
 # define W 119
 # define A 97
 # define S 115
 # define D 100
+
+typedef struct elems
+{
+	int	player;
+	int	enemy;
+	int	col;
+	int	exit;
+}	t_elems;
+
+typedef struct cords
+{
+	int	player_x;
+	int	player_y;
+	int	enemy_x;
+	int	enemy_y;
+	int	col_x;
+	int	col_y;
+	int	exit_x;
+	int	exit_y;
+}	t_cords;
 
 #endif

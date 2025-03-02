@@ -1,7 +1,7 @@
 CC = cc
 FLAGS = -Werror -Wall -Wextra
 MFLAGS = -lmlx -lXext -lX11
-SRC = main.c
+SRC = parser.c
 OBJ = $(SRC:.c=.o)
 
 GNLOBJ = ./gnl/gnl.a
@@ -12,7 +12,7 @@ NAME = so_long
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(GNLOBJ) $(PRINTFOBJ) $(LIBFTOBJ)
 	$(CC) $(FLAGS) $(OBJ) $(GNLOBJ) $(PRINTFOBJ) $(LIBFTOBJ) $(MFLAGS) -o $(NAME)
 
 %.o: %.c
