@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/02 22:18:34 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 03:41:10 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,12 @@ typedef struct cords
 {
 	int	player_x;
 	int	player_y;
-	int	enemy_x[44];
-	int	enemy_y[44];
-	int	col_x[44];
-	int	col_y[44];
+	int	enemy_x[45];
+	int	enemy_y[45];
+	int	col_x[45];
+	int	col_y[45];
 	int	exit_x;
 	int	exit_y;
-	int	enemy_idx;
-	int	col_idx;
 }	t_cords;
 
 #endif

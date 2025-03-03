@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 00:49:43 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 03:42:08 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,12 @@ void	init_struct_cords(t_cords *cords)
 {
 	cords->player_x = -1;
 	cords->player_y = -1;
-	cords->enemy_x = -1;
-	cords->enemy_y = -1;
+	cords->enemy_x[0] = 0;
+	cords->enemy_y[0] = 0;
 	cords->exit_x = -1;
 	cords->exit_y = -1;
-	cords->col_x = -1;
-	cords->col_y = -1;
-	cords->enemy_idx = 0;
-	cords->col_idx = 0;
+	cords->col_x[0] = 0;
+	cords->col_y[0] = 0;
 }
 
 void	set_cords(int x, int y, int *cord_x, int *cord_y)
@@ -142,12 +140,16 @@ void	set_cords(int x, int y, int *cord_x, int *cord_y)
 	*cord_y = y;
 }
 
-void set_cords2(int x, int y, int *cord_x, int *cord_y)
+void	set_cords2(int x, int y, int *cord_x, int *cord_y)
 {
-    cord_x[cord_x[0] + 1] = x;
-    cord_y[cord_y[0] + 1] = y;
-    cord_x[0]++;
-    cord_y[0]++;
+	int index = cord_x[0];
+
+	if (index < 44)
+	{
+		cord_x[index + 1] = x;
+		cord_y[index + 1] = y;
+		cord_x[0]++;
+	}
 }
 
 void	store_cords(char **map, size_t height, t_cords *cords)
@@ -165,11 +167,11 @@ void	store_cords(char **map, size_t height, t_cords *cords)
 			if (map[i][j] == 'P')
 				set_cords(i, j, &cords->player_x, &cords->player_y);
 			else if (map[i][j] == 'C')
-				set_cords2(i, j, &cords->col_x, &cords->col_y);
+				set_cords2(i, j, cords->col_x, cords->col_y);
 			else if (map[i][j] == 'E')
 				set_cords(i, j, &cords->exit_x, &cords->exit_y);
 			else if (map[i][j] == 'N')
-				set_cords2(i, j, &cords->enemy_x, &cords->enemy_y);
+				set_cords2(i, j, cords->enemy_x, cords->enemy_y);
 			j++;
 		}
 		i++;
@@ -256,11 +258,12 @@ void print_cords(t_cords cords)
     ft_printf("Player coordinates: (%d, %d)\n", cords.player_x, cords.player_y);
     ft_printf("Exit coordinates: (%d, %d)\n", cords.exit_x, cords.exit_y);
 
-	for (int i = 0; i < cords.col_count; i++)
-        ft_printf("Collectible %d: (%d, %d)\n", i + 1, cords.col_x[i], cords.col_y[i]);
+	for (int i = 1; i <= cords.col_x[0]; i++)
+    	ft_printf("Collectible %d: (%d, %d)\n", i, cords.col_x[i], cords.col_y[i]);
 
-    for (int i = 0; i < cords.enemy_count; i++)
-        ft_printf("Enemy %d: (%d, %d)\n", i + 1, cords.enemy_x[i], cords.enemy_y[i]);
+	for (int i = 1; i <= cords.enemy_x[0]; i++)
+    	ft_printf("Enemy %d: (%d, %d)\n", i, cords.enemy_x[i], cords.enemy_y[i]);
+
 }
 
 int	main(int argc, char **argv)
