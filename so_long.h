@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 03:41:10 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 04:28:18 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,11 @@ typedef struct cords
 	int	exit_x;
 	int	exit_y;
 }	t_cords;
+
+typedef struct patterns
+{
+	int	cols;
+	int	exit;
+} t_patt
 
 #endif
