@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 16:29:33 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:38:26 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,9 @@ void	set_cords(int x, int y, int *cord_x, int *cord_y)
 
 void	set_cords2(int x, int y, int *cord_x, int *cord_y)
 {
-	int index = cord_x[0];
+	int	index;
 
+	index = cord_x[0];
 	if (index < 44)
 	{
 		cord_x[index + 1] = x;
@@ -235,6 +236,7 @@ int	check_map(char **map, size_t height)
 	return (0);
 }
 
+/*
 void	print_map(char **map, size_t height)
 {
 	size_t	i;
@@ -267,13 +269,14 @@ void print_cords(t_cords cords)
     	ft_printf("Enemy %d: (%d, %d)\n", i, cords.enemy_x[i], cords.enemy_y[i]);
 
 }
+*/
 
-void init_and_store(char **map, size_t height, t_elems *elems, t_cords *cords)
+void	init_and_store(char **map, size_t height, t_elems *elems, t_cords *cords)
 {
-    init_struct_elems(elems);
-    init_struct_cords(cords);
-    store_elems(map, height, elems);
-    store_cords(map, height, cords);
+	init_struct_elems(elems);
+	init_struct_cords(cords);
+	store_elems(map, height, elems);
+	store_cords(map, height, cords);
 }
 
 void	throw_error(char **array, char *msg)
