@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/02 21:11:33 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 00:49:43 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,22 @@ void	init_struct_cords(t_cords *cords)
 	cords->exit_y = -1;
 	cords->col_x = -1;
 	cords->col_y = -1;
+	cords->enemy_idx = 0;
+	cords->col_idx = 0;
 }
 
 void	set_cords(int x, int y, int *cord_x, int *cord_y)
 {
 	*cord_x = x;
 	*cord_y = y;
+}
+
+void set_cords2(int x, int y, int *cord_x, int *cord_y)
+{
+    cord_x[cord_x[0] + 1] = x;
+    cord_y[cord_y[0] + 1] = y;
+    cord_x[0]++;
+    cord_y[0]++;
 }
 
 void	store_cords(char **map, size_t height, t_cords *cords)
@@ -155,11 +165,11 @@ void	store_cords(char **map, size_t height, t_cords *cords)
 			if (map[i][j] == 'P')
 				set_cords(i, j, &cords->player_x, &cords->player_y);
 			else if (map[i][j] == 'C')
-				set_cords(i, j, &cords->col_x, &cords->col_y);
+				set_cords2(i, j, &cords->col_x, &cords->col_y);
 			else if (map[i][j] == 'E')
 				set_cords(i, j, &cords->exit_x, &cords->exit_y);
 			else if (map[i][j] == 'N')
-				set_cords(i, j, &cords->enemy_x, &cords->enemy_y);
+				set_cords2(i, j, &cords->enemy_x, &cords->enemy_y);
 			j++;
 		}
 		i++;
@@ -221,7 +231,6 @@ int	check_map(char **map, size_t height)
 	return (0);
 }
 
-/*
 void	print_map(char **map, size_t height)
 {
 	size_t	i;
@@ -233,12 +242,33 @@ void	print_map(char **map, size_t height)
 		i++;
 	}
 }
-*/
+
+void print_elems(t_elems elems)
+{
+    ft_printf("Player: %d\n", elems.player);
+    ft_printf("Exit: %d\n", elems.exit);
+    ft_printf("Collectibles: %d\n", elems.col);
+    ft_printf("Enemies: %d\n", elems.enemy);
+}
+
+void print_cords(t_cords cords)
+{
+    ft_printf("Player coordinates: (%d, %d)\n", cords.player_x, cords.player_y);
+    ft_printf("Exit coordinates: (%d, %d)\n", cords.exit_x, cords.exit_y);
+
+	for (int i = 0; i < cords.col_count; i++)
+        ft_printf("Collectible %d: (%d, %d)\n", i + 1, cords.col_x[i], cords.col_y[i]);
+
+    for (int i = 0; i < cords.enemy_count; i++)
+        ft_printf("Enemy %d: (%d, %d)\n", i + 1, cords.enemy_x[i], cords.enemy_y[i]);
+}
 
 int	main(int argc, char **argv)
 {
 	char	**map;
 	size_t	height;
+	t_elems	elems;
+	t_cords	cords;
 
 	if (argc != 2)
 		ft_error("Invalid arguments ! > Usage : ./so_long map.ber\n");
@@ -258,6 +288,13 @@ int	main(int argc, char **argv)
 		free_array(map);
 		ft_error("The game map is not playable\n");
 	}
+    init_struct_elems(&elems);
+    init_struct_cords(&cords);
+    store_elems(map, height, &elems);
+    store_cords(map, height, &cords);
+	print_map(map, height);
+	print_elems(elems);
+	print_cords(cords);
 	free_array(map);
 	ft_printf("Game is playable\n");
 	return (0);
