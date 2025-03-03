@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 04:00:22 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:29:33 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ int	check_rectangle(char **map, size_t height)
 	size_t	width;
 
 	i = 1;
+	if (!map[0])
+		return (-1);
 	width = ft_strlen(map[0]);
 	while (i < height)
 	{
@@ -233,7 +235,6 @@ int	check_map(char **map, size_t height)
 	return (0);
 }
 
-/*
 void	print_map(char **map, size_t height)
 {
 	size_t	i;
@@ -266,7 +267,7 @@ void print_cords(t_cords cords)
     	ft_printf("Enemy %d: (%d, %d)\n", i, cords.enemy_x[i], cords.enemy_y[i]);
 
 }
-*/
+
 void init_and_store(char **map, size_t height, t_elems *elems, t_cords *cords)
 {
     init_struct_elems(elems);
@@ -281,6 +282,26 @@ void	throw_error(char **array, char *msg)
 	ft_error(msg);
 }
 
+int	check_ext(const char *file_name)
+{
+	int		i;
+
+	i = 0;
+	if (ft_strlen(file_name) < 5)
+		return (-1);
+	if (file_name[0] == '.')
+		i++;
+	while (file_name[i])
+	{
+		if (file_name[i] == '.')
+			break ;
+		i++;
+	}
+	if (ft_strncmp(&file_name[i], ".ber", 5) != 0)
+		return (-1);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**map;
@@ -290,6 +311,8 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		ft_error("Invalid arguments !");
+	if (check_ext(argv[1]) == -1)
+		ft_error("Wrong extenstion !");
 	map = get_map(argv[1], &height);
 	if (check_rectangle(map, height) == -1)
 		throw_error(map, "Map is not rectangle");
@@ -298,9 +321,9 @@ int	main(int argc, char **argv)
 	if (check_map(map, height) == -1)
 		throw_error(map, "Map is not playable");
 	init_and_store(map, height, &elems, &cords);
-	//print_map(map, height);
-	//print_elems(elems);
-	//print_cords(cords);
+	print_map(map, height);
+	print_elems(elems);
+	print_cords(cords);
 	free_array(map);
 	ft_printf("Game is playable\n");
 	return (0);
