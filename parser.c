@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 03:42:08 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 04:00:22 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	**copy_map(char *path, char **map, size_t height)
 		if (!map[i])
 		{
 			free_array(map);
-			ft_error("GNL Failed\n");
+			ft_error("GNL Failed");
 		}
 		if (map[i][ft_strlen(map[i]) - 1] == '\n')
 			map[i][ft_strlen(map[i]) - 1] = '\0';
@@ -67,7 +67,7 @@ char	**get_map(char *path, size_t *height)
 	*height = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		ft_error("Open failed\n");
+		ft_error("Open failed");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -78,7 +78,7 @@ char	**get_map(char *path, size_t *height)
 	close(fd);
 	map = malloc(sizeof(char *) * (*height + 1));
 	if (!map)
-		ft_error("Malloc Failed\n");
+		ft_error("Malloc Failed");
 	copy_map(path, map, *height);
 	return (map);
 }
@@ -117,7 +117,7 @@ int	check_rectangle(char **map, size_t height)
 			return (-1);
 		i++;
 	}
-	if (i >= width - 1)
+	if (height >= width)
 		return (-1);
 	return (0);
 }
@@ -233,6 +233,7 @@ int	check_map(char **map, size_t height)
 	return (0);
 }
 
+/*
 void	print_map(char **map, size_t height)
 {
 	size_t	i;
@@ -265,6 +266,20 @@ void print_cords(t_cords cords)
     	ft_printf("Enemy %d: (%d, %d)\n", i, cords.enemy_x[i], cords.enemy_y[i]);
 
 }
+*/
+void init_and_store(char **map, size_t height, t_elems *elems, t_cords *cords)
+{
+    init_struct_elems(elems);
+    init_struct_cords(cords);
+    store_elems(map, height, elems);
+    store_cords(map, height, cords);
+}
+
+void	throw_error(char **array, char *msg)
+{
+	free_array(array);
+	ft_error(msg);
+}
 
 int	main(int argc, char **argv)
 {
@@ -274,30 +289,18 @@ int	main(int argc, char **argv)
 	t_cords	cords;
 
 	if (argc != 2)
-		ft_error("Invalid arguments ! > Usage : ./so_long map.ber\n");
+		ft_error("Invalid arguments !");
 	map = get_map(argv[1], &height);
 	if (check_rectangle(map, height) == -1)
-	{
-		free_array(map);
-		ft_error("Map is not rectangle\n");
-	}
+		throw_error(map, "Map is not rectangle");
 	if (check_walls(map, height, ft_strlen(map[0])) == -1)
-	{
-		free_array(map);
-		ft_error("Map is not rounded by walls\n");
-	}
+		throw_error(map, "Map is not rounded by Walls");
 	if (check_map(map, height) == -1)
-	{
-		free_array(map);
-		ft_error("The game map is not playable\n");
-	}
-    init_struct_elems(&elems);
-    init_struct_cords(&cords);
-    store_elems(map, height, &elems);
-    store_cords(map, height, &cords);
-	print_map(map, height);
-	print_elems(elems);
-	print_cords(cords);
+		throw_error(map, "Map is not playable");
+	init_and_store(map, height, &elems, &cords);
+	//print_map(map, height);
+	//print_elems(elems);
+	//print_cords(cords);
 	free_array(map);
 	ft_printf("Game is playable\n");
 	return (0);
