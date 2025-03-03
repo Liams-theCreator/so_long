@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 16:38:26 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/03 21:37:31 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,6 +305,58 @@ int	check_ext(const char *file_name)
 	return (0);
 }
 
+char	**copying(char **map, size_t height)
+{
+	size_t	i;
+	char	**cpy;
+
+	cpy = malloc(sizeof(char *) * (height + 1));
+	if (!cpy)
+		ft_error("Malloc Failed");
+	i = 0;
+	while (i < height)
+	{
+		cpy[i] = ft_strdup(map[i]);
+		if (!cpy[i])
+			throw_error(cpy, "Malloc Failed");
+		i++;
+	}
+	cpy[i] = NULL;
+	return (cpy);
+}
+
+void	flood_fill(char **map, int px, int py, t_elems *elems)
+{
+	if (px < 0 || py < 0 || map[px][py] == '1' || map[px][py] == 'V')
+		return ;
+	if (map[px][py] == 'C')
+		elems->col--;
+	if (map[px][py] == 'E')
+		elems->exit = 1;
+	map[px][py] = 'V';
+	flood_fill(map, px - 1, py, elems);
+	flood_fill(map, px + 1, py, elems);
+	flood_fill(map, px, py - 1, elems);
+	flood_fill(map, px, py + 1, elems);
+}
+
+int	check_path(char **map, size_t height, t_cords *cords, t_elems *elems)
+{
+	char	**cmap;
+
+	cmap = copying(map, height);
+	if (!cmap)
+		ft_error("Malloc Failed");
+	flood_fill(cmap, cords->player_x, cords->player_y, elems);
+	if (elems->col > 0 || elems->exit == 1)
+	{
+		free_array(cmap);
+		return (-1);
+	}
+	free_array(cmap);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	char	**map;
@@ -324,9 +376,11 @@ int	main(int argc, char **argv)
 	if (check_map(map, height) == -1)
 		throw_error(map, "Map is not playable");
 	init_and_store(map, height, &elems, &cords);
-	print_map(map, height);
-	print_elems(elems);
-	print_cords(cords);
+	if (check_path(map, height, &cords, &elems) == -1)
+		throw_error(map, "Invalid path");
+	//print_map(map, height);
+	//print_elems(elems);
+	//print_cords(cords);
 	free_array(map);
 	ft_printf("Game is playable\n");
 	return (0);
