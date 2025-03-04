@@ -1,12 +1,12 @@
 CC = cc
 FLAGS = -Werror -Wall -Wextra
 MFLAGS = -lmlx -lXext -lX11
-SRC = parser.c
+SRC = debugging.c ./parser/parser.c ./parser/parser_checks.c ./parser/parser_getmap.c ./parser/parser_init.c ./parser/parser_path.c ./parser/parser_store.c ./parser/errors.c
 OBJ = $(SRC:.c=.o)
 
-GNLOBJ = ./gnl/gnl.a
-PRINTFOBJ = ./printf/libftprintf.a
-LIBFTOBJ = ./libft/libft.a
+GNLOBJ = ./srcs/gnl/gnl.a
+PRINTFOBJ = ./srcs/printf/libftprintf.a
+LIBFTOBJ = ./srcs/libft/libft.a
 
 NAME = so_long
 
