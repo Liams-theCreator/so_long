@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 04:21:04 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/04 05:02:23 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:02:26 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,20 @@ void	render_textures(t_core *game)
 	}
 }
 
+int	close_window(t_core *game)
+{
+	mlx_destroy_image(game->mlx, game->player);
+	mlx_destroy_image(game->mlx, game->key);
+	mlx_destroy_image(game->mlx, game->exit);
+	mlx_destroy_image(game->mlx, game->wall);
+	mlx_destroy_image(game->mlx, game->ground);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free_array(game->map);
+	exit(0);
+	return (0);
+}
+
 void	start_game(char **map, size_t height, t_cords *cords)
 {
 	t_core	game;
@@ -75,5 +89,6 @@ void	start_game(char **map, size_t height, t_cords *cords)
 	game.cords = *cords;
 	init_textures(&game);
 	render_textures(&game);
+	mlx_hook(game.win, DestroyNotify, 0, &close_window, &game);
 	mlx_loop(game.mlx);
 }
