@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/04 00:43:02 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/04 04:38:20 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,22 @@ typedef struct cords
 	int	exit_y;
 }	t_cords;
 
+typedef struct core
+{
+	void	*mlx;
+	void	*win;
+	char	**map;
+	t_cords	cords;
+	void	*player;
+	void	*enemy;
+	void	*key;
+	void	*exit;
+	void	*wall;
+	void	*ground;
+	int		moves;
+
+} t_core;
+
 /* DEBUGGING FUNCS */
 void	print_map(char **map, size_t height);
 void	print_elems(t_elems elems);
@@ -74,5 +90,8 @@ void	flood_fill(char **map, int px, int py, t_elems *elems);
 void	ft_error(char *error_msg);
 void	throw_error(char **array, char *msg);
 void	free_array(char **array);
+
+/* Game core functions*/
+void	start_game(char **map, size_t height, t_cords *cords);
 
 #endif
