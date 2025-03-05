@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:59:14 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 23:59:25 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/05 00:45:34 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	store_cords(char **map, size_t height, t_cords *cords)
 		{
 			if (map[i][j] == 'P')
 				set_cords(i, j, &cords->player_x, &cords->player_y);
-			else if (map[i][j] == 'C')
-				set_cords2(i, j, cords->col_x, cords->col_y);
 			else if (map[i][j] == 'E')
 				set_cords(i, j, &cords->exit_x, &cords->exit_y);
 			j++;

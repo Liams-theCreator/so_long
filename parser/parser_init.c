@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:46:14 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/03 23:46:27 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/05 00:44:52 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	init_struct_cords(t_cords *cords)
 	cords->player_y = -1;
 	cords->exit_x = -1;
 	cords->exit_y = -1;
-	cords->col_x[0] = 0;
-	cords->col_y[0] = 0;
 }
 
 void	init_and_store(char **map, size_t ht, t_elems *elems, t_cords *cords)

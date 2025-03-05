@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 00:37:23 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/04 00:42:21 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/05 00:44:25 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,6 @@ void	print_elems(t_elems elems)
 
 void	print_cords(t_cords cords)
 {
-	int	i;
-
-	i = 1;
 	ft_printf("Player coordinates: (%d, %d)\n", cords.player_x, cords.player_y);
 	ft_printf("Exit coordinates: (%d, %d)\n", cords.exit_x, cords.exit_y);
-	while (i <= cords.col_x[0])
-	{
-		ft_printf("Collectible %d: (%d, %d)\n", i, cords.col_x[i], cords.col_y[i]);
-		i++;
-	}
 }
