@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/05 00:43:49 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/05 05:39:13 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct core
 	void	*wall;
 	void	*ground;
 	int		moves;
-} t_core;
+}	t_core;
 
 /* DEBUGGING FUNCS */
 void	print_map(char **map, size_t height);
