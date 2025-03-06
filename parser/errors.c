@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:48:51 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/06 19:55:57 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:59:00 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int	check_text(char **map, size_t height)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] != '0' || map[i][j] != '1' || map[i][j] != 'P' ||
-					map[i][j] != 'C' || map[i][j] != 'E')
+			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'P' &&
+					map[i][j] != 'C' && map[i][j] != 'E')
 				return (-1);
 			j++;
 		}
