@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/06 19:55:37 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:57:09 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(int argc, char **argv)
 	init_and_store(map, height, &elems, &cords);
 	if (check_path(map, height, &cords, &elems) == -1)
 		throw_error(map, "Invalid path");
-	ft_printf("Game is running...\n");
 	store_elems(map, height, &elems);
 	start_game(map, height, &cords, &elems);
 	free_array(map);
