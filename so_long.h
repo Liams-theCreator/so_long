@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/06 03:17:10 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:54:46 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct core
 /* Parsing Part */
 int		check_walls(char **map, size_t height, size_t width);
 int		check_rectangle(char **map, size_t height);
+int		check_text(char **map, size_t height);
 int		check_map(char **map, size_t height);
 int		check_valid_elems(t_elems elems);
 int		check_ext(const char *file_name);

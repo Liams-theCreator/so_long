@@ -6,26 +6,26 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 04:21:04 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/06 03:11:39 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:45:34 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	put_texture(t_core *game, int x, int y, char tile)
+void	put_texture(t_core *game, int x, int y, char elem)
 {
 	void	*img;
 
 	img = NULL;
-	if (tile == '0')
+	if (elem == '0')
 		img = game->ground;
-	else if (tile == '1')
+	else if (elem == '1')
 		img = game->wall;
-	else if (tile == 'P')
+	else if (elem == 'P')
 		img = game->player;
-	else if (tile == 'C')
+	else if (elem == 'C')
 		img = game->key;
-	else if (tile == 'E')
+	else if (elem == 'E')
 		img = game->exit;
 	if (img)
 		mlx_put_image_to_window(game->mlx, game->win, img, x * 40, y * 40);

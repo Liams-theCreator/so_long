@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 00:45:37 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/04 23:46:12 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:55:37 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	main(int argc, char **argv)
 	if (check_ext(argv[1]) == -1)
 		ft_error("Wrong extenstion !");
 	map = get_map(argv[1], &height);
+	if (check_text(map, height) == -1)
+		throw_error(map, "Putting invalid element");
 	if (check_rectangle(map, height) == -1)
 		throw_error(map, "Map is not rectangle");
 	if (check_walls(map, height, ft_strlen(map[0])) == -1)
