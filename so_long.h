@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:19:15 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/05 05:39:13 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 03:17:10 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ typedef struct core
 	int		moves;
 }	t_core;
 
-/* DEBUGGING FUNCS */
-void	print_map(char **map, size_t height);
-void	print_elems(t_elems elems);
-void	print_cords(t_cords cords);
-
 /* Parsing Part */
 int		check_walls(char **map, size_t height, size_t width);
 int		check_rectangle(char **map, size_t height);
@@ -90,5 +85,9 @@ void	free_array(char **array);
 
 /* Game core functions*/
 void	start_game(char **map, size_t height, t_cords *cords, t_elems *elems);
+void	init_game(t_core *game, t_cords *cords, t_elems *elems, char **map);
+void	init_textures(t_core *game);
+void	end_game(t_core *game);
+int		close_window(t_core *game);
 
 #endif

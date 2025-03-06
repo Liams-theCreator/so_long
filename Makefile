@@ -1,7 +1,7 @@
 CC = cc
 FLAGS = -Werror -Wall -Wextra
 MFLAGS = -lmlx -lXext -lX11
-SRC = game.c debugging.c ./parser/parser.c ./parser/parser_checks.c ./parser/parser_getmap.c ./parser/parser_init.c ./parser/parser_path.c ./parser/parser_store.c ./parser/errors.c
+SRC = ./game/game.c ./game/game_utils.c ./parser/parser.c ./parser/parser_checks.c ./parser/parser_getmap.c ./parser/parser_init.c ./parser/parser_path.c ./parser/parser_store.c ./parser/errors.c
 OBJ = $(SRC:.c=.o)
 
 GNLOBJ = ./srcs/gnl/gnl.a
@@ -19,7 +19,7 @@ $(NAME): $(OBJ) $(GNLOBJ) $(PRINTFOBJ) $(LIBFTOBJ)
 	$(CC) $(FLAGS) $(MFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f *.o
 
 fclean: clean
 	rm -f $(NAME)
