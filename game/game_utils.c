@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 03:09:02 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/06 03:09:12 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:12:45 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,31 @@ void	init_game(t_core *game, t_cords *cords, t_elems *elems, char **map)
 	game->cords = *cords;
 	game->elems = *elems;
 	game->moves = 0;
+	game->wall = NULL;
+	game->ground = NULL;
+	game->player = NULL;
+	game->key = NULL;
+	game->exit = NULL;
+}
+
+void	texture_error(t_core *game, char *msg)
+{
+	if (game->wall)
+		mlx_destroy_image(game->mlx, game->wall);
+	if (game->ground)
+		mlx_destroy_image(game->mlx, game->ground);
+	if (game->player)
+		mlx_destroy_image(game->mlx, game->player);
+	if (game->key)
+		mlx_destroy_image(game->mlx, game->key);
+	if (game->exit)
+		mlx_destroy_image(game->mlx, game->exit);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free_array(game->map);
+	ft_printf("%s\n", msg);
+	exit(-1);
 }
 
 void	init_textures(t_core *game)
@@ -37,7 +62,7 @@ void	init_textures(t_core *game)
 			&width, &height);
 	if (!game->wall || !game->player || !game->key
 		|| !game->exit || !game->ground)
-		throw_error(game->map, "Failed to init textures");
+		texture_error(game, "init texture failed");
 }
 
 int	close_window(t_core *game)

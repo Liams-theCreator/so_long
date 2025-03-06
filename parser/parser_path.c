@@ -6,7 +6,7 @@
 /*   By: imellali <imellali@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 23:56:46 by imellali          #+#    #+#             */
-/*   Updated: 2025/03/04 00:36:45 by imellali         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:15:46 by imellali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	flood_fill(char **map, int px, int py, t_elems *elems)
 	if (map[px][py] == 'C')
 		elems->col--;
 	if (map[px][py] == 'E')
+	{
 		elems->exit--;
+		return ;
+	}
 	map[px][py] = 'V';
 	flood_fill(map, px - 1, py, elems);
 	flood_fill(map, px + 1, py, elems);
